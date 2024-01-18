@@ -37,7 +37,45 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+    // try {
+    //     const newPost = req.body
+    //     if(!req.body.title || !req.body.contents){
+    //         res.status(400).json({
+    //             message: "Please provide title and contents for the post"
+    //         })
+    //     } else {
+    //         Post.insert(newPost)
+    //         const fullPost = await Post.findById(newPost.id)
+    //         res.status(201).json(fullPost)
+    //     }
+
+    // } catch(err) {
+    //     res.status(500).json({
+    //         message: "There was an error while saving the post to the database"
+    //     })
+    // }
+    const newPost = req.body
+    if(!newPost.title || !newPost.contents){
+        res.status(400).json({
+            message: "Please provide title and contents for the post"
+        })
+    } else {
+        Post.insert(newPost)
+        .then(({ id }) => {
+            return Post.findById(id)
+        })
+        .then(fullPost => {
+            res.status(201).json(fullPost)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "There was an error while saving the post to the database",
+                err: err.message
+        })
+    })
+
+    }
 
 })
 
