@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
     })
     .catch(err => {
         res.status(500).json({
-            message: "The posts information could not be retrieved"
+            message: "The posts information could not be retrieved",
+            err: err.message
         })
     })
 })
@@ -20,7 +21,7 @@ router.get('/:id', (req, res) => {
     const { id } = req.params
     Post.findById(id)
     .then(foundRightPost => {
-        if(!id){
+        if(!id || !foundRightPost){
             res.status(404).json({
                 message: "The post with the specified ID does not exist"
             })
@@ -29,8 +30,9 @@ router.get('/:id', (req, res) => {
         }
     })
     .catch(err => {
-        res.status(404).json({
-            message: "The post with the specified ID does not exist"
+        res.status(500).json({
+            message: "The post with the specified ID does not exist",
+            err: err.message
         })
     })
 })
