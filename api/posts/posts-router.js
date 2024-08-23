@@ -45,8 +45,11 @@ router.post('/', async (req, res) => {
     //             message: "Please provide title and contents for the post"
     //         })
     //     } else {
+
     //         Post.insert(newPost)
+
     //         const fullPost = await Post.findById(newPost.id)
+
     //         res.status(201).json(fullPost)
     //     }
 
@@ -215,3 +218,7 @@ router.get('/:id/comments', async (req, res) => {
 
 
 module.exports = router
+
+
+
+
