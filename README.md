@@ -159,3 +159,6 @@ To work on the stretch problems you'll need to enable the `cors` middleware. Fol
 
 - add the `cors` npm module: `npm i cors`.
 - add `server.use(cors())` after `server.use(express.json())`.
+
+
+
